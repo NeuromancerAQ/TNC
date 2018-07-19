@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div style="background: #123456"></div>
+    <div style="background: #654321"></div>
+    <div style="background: #000000"></div>
+    <div style="background: #687942"></div>
+    <div style="background: #2a5d1c"></div>
+    <div style="background: #e9fca6"></div>
+</body>
+</html>
+<script src="js/jquery-1.11.3.js"></script>
+<script>
+
+    !function(){
+            $("div").css({
+                width:"100%",
+                position:"relative",
+                height:window.innerHeight+"px"
+                //top:"100%"
+            });
+    }();
+    var n=0;
+    $("div").on("mousewheel",function(e){
+        e.preventDefault();
+        var flag=0;
+        function go(){
+            if(flag==0 && e.originalEvent.wheelDelta<0){
+                n++;
+                document.documentElement.scrollTop++;
+                console.log(document.documentElement.scrollTop);
+                if(n==50){
+                    clearInterval(start);
+                    flag=1;
+                    n=0;
+                }
+            }else if(flag==0 && e.originalEvent.wheelDelta>0){
+                n--;
+                document.documentElement.scrollTop--;
+                console.log(document.documentElement.scrollTop);
+                if(n==-50){
+                    clearInterval(start);
+                    flag=1;
+                    n=0;
+                }
+            }
+        }
+        if(n%50==0){
+            start=setInterval(go,1);
+        }
+    })
+</script>
